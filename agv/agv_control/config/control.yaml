@@ -1,0 +1,32 @@
+agv:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  fl_joint_position_controller:
+    type: position_controllers/JointPositionController
+    joint: fl_joint
+    pid: { p: 6000.0, i: 100.0, d: 100.0}
+  fr_joint_position_controller:
+    type: position_controllers/JointPositionController
+    joint: fr_joint
+    pid: { p: 6000.0, i: 100.0, d: 100.0}
+  bl_joint_position_controller:
+    type: position_controllers/JointPositionController
+    joint: bl_joint
+    pid: { p: 6000.0, i: 100.0, d: 100.0}
+  br_joint_position_controller:
+    type: position_controllers/JointPositionController
+    joint: br_joint
+    pid: { p: 6000.0, i: 100.0, d: 100.0}
+
+agv/gazebo_ros_control/pid_gains:
+        fl_joint:   {p: 6000.0, i: 0.0, d: 100.0, i_clamp: 100.0}
+        fr_joint:   {p: 6000.0, i: 0.0, d: 100.0, i_clamp: 100.0}
+        bl_joint:   {p: 6000.0, i: 0.0, d: 100.0, i_clamp: 100.0}
+        br_joint:   {p: 6000.0, i: 0.0, d: 100.0, i_clamp: 100.0}
+
+
+
+

@@ -1,0 +1,146 @@
+<?xml version="1.0" ?>
+
+<!-- 
+  https://www.youtube.com/watch?v=HIK1KBw-Jn4
+
+  http://moorerobots.com/blog/post/3
+
+  https://github.com/richardw05/mybot_ws/tree/master/src
+
+  https://github.com/qboticslabs/Chefbot_ROS_pkg
+
+  https://answers.ros.org/question/249568/no-such-file-or-directory-gmappinglaunchxml-or-amcllaunchxml-under-turtlebot_navigationlaunchincludes/
+
+  http://wiki.ros.org/navigation/Tutorials
+
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <link name="camera_link">
+    <collision>
+      <origin xyz="0 0 0" 
+              rpy="0 0 0"/>
+      <geometry>
+        <box size="${cameraLength} 
+                   ${cameraWidth} 
+                   ${cameraHeight}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" 
+              rpy="0 0 0"/>
+      <geometry>
+        <box size="${cameraLength} 
+                   ${cameraWidth} 
+                   ${cameraHeight}"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+
+    <inertial>
+      <mass value="${cameraMass}" />
+      <origin xyz="0 0 0" 
+              rpy="0 0 0"/>
+      <box_inertia m="${cameraMass}" 
+                   x="${cameraLength}" 
+                   y="${cameraWidth}" 
+                   z="${cameraHeight}" />
+    </inertial>
+
+  </link>
+
+
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="${cameraOffsetX} 0 ${cameraOffsetZ}" 
+            rpy="0 0 0"/>
+    <parent link="base_Link"/>
+    <child link="camera_link"/>
+  </joint>
+
+
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="${hokuyoOffsetX} ${hokuyoOffsetY} ${hokuyoOffsetZ}" 
+            rpy="0 0 0"/>
+    <parent link="base_Link"/>
+    <child link="hokuyo_link"/>
+  </joint>
+
+
+  <!-- Hokuyo Laser -->
+  <link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" 
+              rpy="0 0 0"/>
+      <geometry>
+        <box size="${hokuyoLength} 
+                   ${hokuyoWidth} 
+                   ${hokuyoHeight}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" 
+              rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://agv_description/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="${hokuyoMass}" />
+      <origin xyz="0 0 0" 
+              rpy="0 0 0"/>
+      <box_inertia 
+        m="${hokuyoMass}" 
+        x="${hokuyoLength}" 
+        y="${hokuyoWidth}" 
+        z="${hokuyoHeight}"/>
+    </inertial>
+
+  </link>
+
+  <!-- IMU sensor -->
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_Link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link">
+   <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.010" />
+      <inertia
+        ixx="1"
+        ixy="0"
+        ixz="0"
+        iyy="1"
+        iyz="0"
+        izz="1" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+	<box size="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="red" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.5707 1.5707" />
+      <geometry>
+	<box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+  </link>
+
+</robot>

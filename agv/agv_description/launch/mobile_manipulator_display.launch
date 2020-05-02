@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+  <arg
+    name="urdf_file" default="$(find xacro)/xacro.py '$(find agv_description)/urdf/mobile_manipulator.xacro'" />
+  <arg
+    name="gui"
+    default="True" />
+  <param
+    name="robot_description"
+    command="$(arg urdf_file)" />
+  <param
+    name="use_gui"
+    value="$(arg gui)" />
+  <node
+    name="joint_state_publisher"
+    pkg="joint_state_publisher"
+    type="joint_state_publisher" />
+  <node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="robot_state_publisher" />
+  <node
+    name="rviz"
+    pkg="rviz"
+    type="rviz"
+    args="-d $(find agv_description)/urdf.rviz" />
+</launch>

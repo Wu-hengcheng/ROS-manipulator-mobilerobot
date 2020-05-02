@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="model" default="$(find agv_description)/urdf/agv.xacro"/>
+  <arg name="rvizconfig" default="$(find agv_description)/urdf.rviz" />
+  <arg name="world_name" default="$(find agv_gazebo)/world/factory_with_agv" />  <!-- load designed world-->
+
+
+  <!-- We resume the logic in empty_world.launch -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="world_name" value="$(arg world_name)" />
+  </include>
+
+  <!-- urdf xml robot description loaded on the Parameter Server-->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv.xacro'" /> 
+
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+  <!-- start robot state publisher -->
+ <!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+    <param name="publish_frequency" type="double" value="20.0" />
+  </node>-->
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <!--node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model agv -param robot_description"/--> 
+
+ 	<!-- 
+ 		Open Rviz 
+ 		- required="false" : if the program is closed, the simulation doesn't shutdown 
+ 	-->
+  <node name="rviz" 
+        pkg="rviz" 
+    	type="rviz" 
+    	args="-d $(arg rvizconfig)" />
+
+	<!-- 
+ 		spawn robot and load controllers
+ 	-->
+        <include file="$(find agv_control)/launch/agv_control.launch">
+		<arg name="model" value="$(arg model)"/>
+	</include>
+
+
+
+</launch>

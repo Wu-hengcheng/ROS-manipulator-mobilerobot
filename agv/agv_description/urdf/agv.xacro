@@ -1,0 +1,309 @@
+<?xml version="1.0"?>
+<robot name= "agv"  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<!-- Robot constants and properties -->
+	<xacro:include filename="$(find agv_description)/urdf/agv_properties.xacro" />
+	<!-- Gazebo aspects of the robot -->
+	<xacro:include filename="$(find agv_description)/urdf/agv.gazebo" />
+	<!-- Inertia matrices -->
+	<xacro:include filename="$(find agv_description)/urdf/macros.xacro" />
+        <!-- import Rviz color-->
+        <xacro:include filename="$(find agv_description)/urdf/materials.xacro" />
+
+
+  <link
+    name="base_footprint">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="2.01061929829948E-06" />
+      <inertia
+        ixx="8.04274527577102E-12"
+        ixy="0"
+        ixz="0"
+        iyy="8.04274527577102E-12"
+        iyz="0"
+        izz="1.60849543863958E-11" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/base_footprint.STL" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/base_footprint.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+  <!-- base link-->
+  <link
+    name="base_Link">
+    <inertial>
+      <!--origin
+        xyz="0 0 0.125713618058247"
+        rpy="0 0 0" /-->
+      <origin
+        xyz="0 0 0" 
+        rpy="0 0 0"/>
+      <mass
+        value="1000" />
+      <box_inertia
+        m="1000"
+        x="2"
+        y="1.5"
+        z="0.23" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/base_Link.STL" />
+      </geometry>
+      <material name="orange" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/base_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint
+    name="base_footprint_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 4E-05"
+      rpy="0 0 0" />
+    <parent
+      link="base_footprint" />
+    <child
+      link="base_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+ <!-- front left link-->
+  <link
+    name="fl_Link">
+    <inertial>
+      <origin
+        xyz="0 0 0.035"
+        rpy="0 0 0" />
+      <mass
+        value="2.02796060125243" />
+      <cylinder_inertia
+        m="5"
+        r="0.1"
+        h="0.14" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/fl_Link.STL" />
+      </geometry>
+      <material name="black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/fl_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+  <joint
+    name="fl_joint"
+    type="continuous">
+    <origin
+      xyz="0.6 0.68 0.09"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_Link" />
+    <child
+      link="fl_Link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+  <!-- back left link-->
+  <link
+    name="bl_Link">
+    <inertial>
+      <origin
+        xyz="1.11022302462516E-16 0 0.0349886144674467"
+        rpy="0 0 0" />
+      <mass
+        value="5" />
+      <cylinder_inertia
+        m="5"
+        r="0.1"
+        h="0.14" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/bl_Link.STL" />
+      </geometry>
+      <material name="black" />
+
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/bl_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="bl_joint"
+    type="continuous">
+    <origin
+      xyz="-0.6 0.68 0.0900000000000001"
+      rpy="-1.5707963267949 0 0" />
+    <parent
+      link="base_Link" />
+    <child
+      link="bl_Link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+<!-- front right link-->
+  <link
+    name="fr_Link">
+    <inertial>
+      <origin
+        xyz="0 2.22044604925031E-16 0.0350501592853405"
+        rpy="0 0 0" />
+      <mass
+        value="2.03116301113069" />
+      <cylinder_inertia
+        m="5"
+        r="0.1"
+        h="0.14" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/fr_Link.STL" />
+      </geometry>
+      <material name="black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/fr_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint
+    name="fr_joint"
+    type="continuous">
+    <origin
+      xyz="0.6 -0.68 0.0900000000000001"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_Link" />
+    <child
+      link="fr_Link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+<!-- back right link-->
+  <link
+    name="br_Link">
+    <inertial>
+      <origin
+        xyz="0 0 0.0349611985496496"
+        rpy="0 0 0" />
+      <mass
+        value="2.03044090786952" />
+      <cylinder_inertia
+        m="5"
+        r="0.1"
+        h="0.14" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/br_Link.STL" />
+      </geometry>
+      <material name="black" />
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agv_description/meshes/br_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+ <joint
+    name="br_joint"
+    type="continuous">
+    <origin
+      xyz="-0.6 -0.68 0.0899999999999994"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="base_Link" />
+    <child
+      link="br_Link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+  <!-- sensors -->
+  <xacro:include filename="$(find agv_description)/urdf/sensors.xacro" />
+</robot>
