@@ -1,0 +1,8 @@
+<launch>
+
+    <rosparam file="$(find manipulator_moveit_config)/config/trajectory_control.yaml" command="load"/>
+
+    <node name="manipulator_description_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" ns="/manipulator_description" args="arm_controller"/>
+
+</launch>

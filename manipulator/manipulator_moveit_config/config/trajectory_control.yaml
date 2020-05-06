@@ -1,0 +1,25 @@
+manipulator_description:
+   # Publish all joint states -----------------------------------
+#  joint_state_controller:
+#    type: "joint_state_controller/JointStateController"
+#    publish_rate: 50 
+
+  arm_controller:
+    type: "position_controllers/JointTrajectoryController"
+#     type: "arm_control/JointTrajectoryController"
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+
+    gains:
+      joint_1:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint_2:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint_3:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint_4:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint_5:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint_6:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+

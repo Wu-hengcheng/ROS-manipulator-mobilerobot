@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<launch>
+  
+    <!-- Launch Gazebo  -->
+    <include file="$(find manipulator_description_gazebo)/launch/gazebo_world.launch" />
+
+    <!-- ros_control arm launch file -->
+    <include file="$(find manipulator_description_gazebo)/launch/gazebo_states.launch" />   
+
+    <!-- ros_control trajectory control dof arm launch file -->
+    <include file="$(find manipulator_description_gazebo)/launch/trajectory_controller.launch" />
+
+    <!-- moveit launch file -->
+    <include file="$(find manipulator_moveit_config)/launch/moveit_planning_execution.launch">
+        <arg name="gazebo" default="true" />
+    </include>
+
+    <!-- controller_manager launch file -->
+    <include file="$(find manipulator_description_gazebo)/launch/manipulator_description_moveit_controller_manager.launch" />
+    
+    <!-- publish joint states -->
+	<!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+		<param name="/use_gui" value="false"/>
+		<rosparam param="/source_list">[/move_group/fake_controller_joint_states]</rosparam>
+	</node>-->
+
+
+</launch>

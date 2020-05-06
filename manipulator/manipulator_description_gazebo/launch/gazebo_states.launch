@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- 将关节控制器的配置参数加载到参数服务器中 -->
+    <rosparam file="$(find manipulator_description_gazebo)/config/gazebo_joint_states.yaml" command="load"/>
+
+    <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" ns="/manipulator_description" args="joint_state_controller" />
+
+    <!-- 运行robot_state_publisher节点，发布tf  -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+      <remap from="/joint_states" to="/manipulator_description/joint_states" />
+    </node>
+
+</launch>

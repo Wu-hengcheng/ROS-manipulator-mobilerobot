@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find manipulator_moveit_config)/config/controllers.yaml" command="load"/>
+
+  <!-- Load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false"
+    output="screen" args="spawm joint_state_concrotller manipulator_description/arm_controller"/>
+
+</launch>
