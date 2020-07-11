@@ -266,11 +266,5 @@ target_link_libraries(cubic_spline_planning
   ${catkin_LIBRARIES}
 )
 
-add_executable(manipulator_server
-  src/manipulator_server.cpp
-)
-add_dependencies(manipulator_server ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(manipulator_server
-  ${catkin_LIBRARIES}
-)
+
 
