@@ -1,5 +1,6 @@
 # ROS-manipulator-mobilerobot
 Envirment:Ubuntu18.04+ROS melodic+MoveIt!+Gazebo+ros_control+navigation stack+gmapping
+
 Plugins need to install:trac_ik, teb_local_planner
 
 If you use this project,please cite as following:
