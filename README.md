@@ -7,4 +7,4 @@ If you use this project,please cite as following:
 
 [1] 吴恒城.金刚石生产线上下料系统设计及控制技术研究[D].北京：北京交通大学，2020：1-99.
 
-![image](https://github.com/Wu-hengcheng/ROS-manipulator-mobilerobot/blob/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200806211026.jpg)
+![image](https://github.com/Wu-hengcheng/ROS-manipulator-mobilerobot/blob/master/photo_20200806211026.jpg)
